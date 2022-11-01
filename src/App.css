@@ -1,38 +1,67 @@
-.App {
-  text-align: center;
+
+.hotel-area {
+  float: left;
+  width: 50%;
+  padding: 10px;   
+  border: 1px solid #000;
+  margin: 10px;   
+  /* put this in the middle of the page */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);  
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hotel-image {
+  float: right;
+  width: 40%;   
+  height: 300px; 
+  margin-bottom: 1em;
+  padding: 10px;
+}
+.star-rating{
+  float: right;
+  width: 50%;
+  margin-bottom: 1em;
+  font-family: FontAwesome;
+  content: "\f005";
+  font-size: 1.5em;
+  color: #FFD700;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.hotel-name {
+  float: left;
+  width: 50%;
+  size: 20px;
+  font-size: 30px;
+}
+.hotel-address {
+  float: left;
+  width: 50%;
+  size: 20px;
+  font-size: 20px;
+}
+.view-all-images{
+  float: left;
+  width: 52%;
+  size: 20px;
+  font-size: 20px;
+  padding: 10px;
+}
+.hotel-description {
+  float: left;
+  width: 50%;
+  size: 20px;
+  font-size: 20px;
+  padding: 10px;
+}
+.rooms {
+  float: left;
+  width: 50%;
+  padding: 10px;   
+  border: 1px solid #000;
+  margin: 10px;   
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
