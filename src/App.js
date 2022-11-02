@@ -1,11 +1,16 @@
-import logo from "./logo.svg";
+import logo from "./images/logo.png";
 import "./App.css";
 import Hotel from "./Components/Hotel";
 
 function App() {
   return (
     <div className="App">
-      <h1>logo placeholder</h1>
+      <img
+        src={logo}
+        className="App-logo"
+        alt="logo"
+        style={{ height: "120px" }}
+      />
       {/* Hotel Name & review */}
       <Hotel />
     </div>

@@ -7,40 +7,34 @@ const URL = "https://obmng.dbm.guestline.net/api/hotels?collection-id=OBMNG";
 
 const Hotel = () => {
   const [hotels, setHotels] = useState([]);
-  const [selectedRating, setSelectedRating] = useState(0);
+  const [starRating, setStarRating] = useState("");
+  const [, setImages] = useState();
+
+  const getHotels = React.useCallback(async () => {
+    const response = await fetch(URL);
+    setHotels(await response.json());
+    console.log(hotels);
+  }, []);
 
   useEffect(() => {
     getHotels();
-  }, []);
+  }, [getHotels]);
 
-  const getHotels = async () => {
-    const response = await fetch(URL);
-    const data = await response.json();
-    setHotels(data);
-  };
-
-  // filter hotels button displayed by star rating
-  const handleRatingChange = (e) => {
-    const starRating = e.target.value;
-    setSelectedRating(starRating);
-  };
-
-  const filteredHotels = useMemo(
+  const filteredHotels = React.useMemo(
     () =>
-      hotels.filter((hotel) => {
-        // updated chck for select All option
-        if (parseInt(selectedRating, 10) === 0) return hotel;
-        return parseInt(hotel.starRating, 10) === parseInt(selectedRating, 10);
-      }),
-    [hotels, selectedRating]
+      +starRating ? hotels.filter((h) => h.starRating === starRating) : hotels,
+    [hotels, starRating]
   );
 
   return (
-    <div>
-      <div className="selection-filter">
+    <div className="body">
+      <div
+        className="selection-filter"
+        onChange={(e) => setStarRating(e.target.value || "")}
+      >
         {/* drop down for useState */}
         <label htmlFor="filter">Filter by star rating: </label>
-        <select onChange={handleRatingChange}>
+        <select id="filter">
           <option value="0">All</option>
           <option value="1">1 Star</option>
           <option value="2">2 Star</option>
@@ -63,10 +57,25 @@ const Hotel = () => {
                   alt={data?.images[0]?.alt || ""}
                 />
               )}
+              {/* button to open HotelModal.js */}
 
               <div className="hotel-address">{data?.address1}</div>
+              <div className="hotel-address">{data?.address2}</div>
+              <div className="hotel-address">{data?.postcode}</div>
+              <div className="hotel-address">{data.town}</div>
+
               <div className="star-rating fas fa-star">{data?.starRating}</div>
-              <div className="rooms">
+              <button
+                onClick={() =>
+                  setImages((data.images || []).map((i) => i.url || ""))
+                }
+                type="button"
+                className="btn btn-primary view-all-images"
+                // onClick={openImages}
+              >
+                View Gallery
+              </button>
+              <div>
                 <Rooms hotelId={data?.id} />
               </div>
             </div>
